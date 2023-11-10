@@ -1,0 +1,19 @@
+@startuml use case diagram
+
+title Solar Boat Smart MPPT
+
+left to right direction
+actor "Team Captain" as tc
+actor "Voltage Sensor" as vs
+actor "Current Sensor" as cs
+rectangle Solar_Boat_Power_Measurement_Unit {
+  usecase "Measure voltage" as UC1
+  usecase "Measure current" as UC2
+  usecase "Calculate power" as UC3
+}
+UC1 -- vs 
+UC2 -- cs
+UC3 -- UC1
+UC3 -- UC2
+tc -- UC3
+@enduml
