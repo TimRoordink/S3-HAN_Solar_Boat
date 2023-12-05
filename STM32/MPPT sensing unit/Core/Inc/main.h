@@ -49,6 +49,8 @@ extern "C" {
 
 /* USER CODE END EM */
 
+void HAL_TIM_MspPostInit(TIM_HandleTypeDef *htim);
+
 /* Exported functions prototypes ---------------------------------------------*/
 void Error_Handler(void);
 
@@ -57,8 +59,22 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
+#define Current_E_Pin GPIO_PIN_0
+#define Current_E_GPIO_Port GPIOA
+#define Current_F_Pin GPIO_PIN_1
+#define Current_F_GPIO_Port GPIOA
 #define VCP_TX_Pin GPIO_PIN_2
 #define VCP_TX_GPIO_Port GPIOA
+#define TIMER2_Pin GPIO_PIN_5
+#define TIMER2_GPIO_Port GPIOA
+#define BTN1_Pin GPIO_PIN_9
+#define BTN1_GPIO_Port GPIOA
+#define BTN2_Pin GPIO_PIN_10
+#define BTN2_GPIO_Port GPIOA
+#define CAN_RX_Pin GPIO_PIN_11
+#define CAN_RX_GPIO_Port GPIOA
+#define CAN_TX_Pin GPIO_PIN_12
+#define CAN_TX_GPIO_Port GPIOA
 #define SWDIO_Pin GPIO_PIN_13
 #define SWDIO_GPIO_Port GPIOA
 #define SWCLK_Pin GPIO_PIN_14
@@ -67,6 +83,10 @@ void Error_Handler(void);
 #define VCP_RX_GPIO_Port GPIOA
 #define LD3_Pin GPIO_PIN_3
 #define LD3_GPIO_Port GPIOB
+#define I2C_SCL_Pin GPIO_PIN_6
+#define I2C_SCL_GPIO_Port GPIOB
+#define I2C_SDA_Pin GPIO_PIN_7
+#define I2C_SDA_GPIO_Port GPIOB
 
 /* USER CODE BEGIN Private defines */
 
