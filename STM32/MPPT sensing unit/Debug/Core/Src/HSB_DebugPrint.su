@@ -1,2 +1,2 @@
-../Core/Src/HSB_DebugPrint.c:11:6:HSB_DebugPrint_Init	16	static
-../Core/Src/HSB_DebugPrint.c:15:6:HSB_DebugPrint	8	static
+../Core/Src/HSB_DebugPrint.c:16:6:HSB_DebugPrint_Init	16	static
+../Core/Src/HSB_DebugPrint.c:20:6:HSB_DebugPrint	8	static

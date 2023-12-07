@@ -7,14 +7,34 @@
 
 #include "HSB_CurrentModule.h"
 
+uint16_t currentE;
+uint16_t currentF;
+uint16_t rawValues[2];
+uint16_t rawE;
+uint16_t rawF;
+uint16_t voltageE;
+uint16_t voltageF;
+const float offset = 322;
+const float Vref = 3.3;
+const float twelfBitADC = 4096;
+const float unitValue = Vref / twelfBitADC * 1000;
+const float sensitivity = 1000.0 / 264.0;// 1000mA per 265 mV
+uint8_t convCompleted = 0;
+
+void HSB_CurrenModule_Init()
+{
+
+}
+
 void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef *hadc)
 {
 	convCompleted = 1;
 }
 
+
 void HSB_CurrentModule(){
 	HAL_ADC_Start_DMA(&hadc1, (uint32_t *) rawValues, 2);
-	while(!convCompleted);
+	//while(!convCompleted);
 
 	  for(uint8_t i=0; i<hadc1.Init.NbrOfConversion; i++){
 		  rawE = (uint16_t) rawValues[0];

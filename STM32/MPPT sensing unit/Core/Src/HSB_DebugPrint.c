@@ -7,6 +7,11 @@
 
 #include "HSB_DebugPrint.h"
 
+char msg[20];
+
+//Boolean for turn off debug print
+//Make false to turn off
+bool HSB_DebugPrintOn = true;
 
 void HSB_DebugPrint_Init(bool input){
 	HSB_DebugPrintOn = input;

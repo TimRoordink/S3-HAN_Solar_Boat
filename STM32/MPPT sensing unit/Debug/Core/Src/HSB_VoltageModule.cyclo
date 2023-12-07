@@ -1,2 +1,2 @@
-../Core/Src/HSB_VoltageModule.c:10:6:HSB_VoltageModule_Init	1
-../Core/Src/HSB_VoltageModule.c:14:10:HSB_ReadMCP3427	1
+../Core/Src/HSB_VoltageModule.c:15:6:HSB_VoltageModule_Init	1
+../Core/Src/HSB_VoltageModule.c:19:10:HSB_ReadMCP3427	1

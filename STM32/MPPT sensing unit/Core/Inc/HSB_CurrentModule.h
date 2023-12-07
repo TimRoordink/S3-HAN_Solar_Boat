@@ -13,19 +13,10 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdbool.h>
+#include "HSB_DebugPrint.h"
 
-uint16_t currentE;
-uint16_t currentF;
-uint16_t rawValues[2];
-uint16_t rawE;
-uint16_t rawF;
-uint16_t voltageE;
-uint16_t voltageF;
-const float offset = 322;
-const float Vref = 3.3;
-const float twelfBitADC = 4096;
-const float unitValue = Vref / twelfBitADC * 1000;
-const float sensitivity = 1000.0 / 264.0;// 1000mA per 265 mV
-uint8_t convCompleted = 0;
+void HSB_CurrenModule_Init();
+
+void HSB_CurrentModule();
 
 #endif /* INC_HSB_CURRENTMODULE_H_ */

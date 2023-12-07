@@ -107,6 +107,7 @@ int main(void)
   /* USER CODE BEGIN 2 */
   HSB_DebugPrint_Init(true);
   HSB_VoltageModule_Init(0x68);
+
   //HAL_ADC_Start_DMA(&hadc1, (uint32_t *) rawValues, 2);
   /* USER CODE END 2 */
 

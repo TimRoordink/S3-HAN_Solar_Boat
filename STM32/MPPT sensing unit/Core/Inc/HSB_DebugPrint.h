@@ -15,12 +15,6 @@
 #include <stdio.h>
 #include <string.h>
 
-char msg[20];
-
-//Boolean for turn off debug print
-//Make false to turn off
-bool HSB_DebugPrintOn = true;
-
 void HSB_DebugPrint_Init(bool input);
 
 void HSB_DebugPrint(const char *x, ...);

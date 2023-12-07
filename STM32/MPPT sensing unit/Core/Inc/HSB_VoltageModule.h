@@ -14,10 +14,6 @@
 #include <string.h>
 #include <stdbool.h>
 
-//I2C variables
-uint8_t i2cAddress = (0x68 << 1) | 0b0; //0xD0
-uint8_t readCH1 = 0x88; // write to acd to start reading channel 1
-uint8_t readCH2 = 0xA8; // write to acd to start reading channel 2
 
 void HSB_VoltageModule_Init(uint8_t adress);
 
