@@ -1,3 +1,6 @@
+"./Core/Src/HSB_CurrentModule.o"
+"./Core/Src/HSB_DebugPrint.o"
+"./Core/Src/HSB_VoltageModule.o"
 "./Core/Src/adc.o"
 "./Core/Src/can.o"
 "./Core/Src/dma.o"

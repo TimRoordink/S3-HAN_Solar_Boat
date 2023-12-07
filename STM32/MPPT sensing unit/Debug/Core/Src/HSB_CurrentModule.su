@@ -1,0 +1,2 @@
+../Core/Src/HSB_CurrentModule.c:10:6:HAL_ADC_ConvCpltCallback	16	static
+../Core/Src/HSB_CurrentModule.c:15:6:HSB_CurrentModule	16	static

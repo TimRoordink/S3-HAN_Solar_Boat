@@ -31,6 +31,10 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdbool.h>
+
+#include "HSB_DebugPrint.h"
+#include "HSB_VoltageModule.h"
+#include "HSB_CurrentModule.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -51,44 +55,19 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
-//Boolean for turn off debug print
-//Make false to turn off
-bool HSB_DebugPrintOn = true;
 
-
-uint16_t currentE;
-uint16_t currentF;
-uint16_t rawValues[2];
-uint16_t rawE;
-uint16_t rawF;
-uint16_t voltageE;
-uint16_t voltageF;
-const float offset = 322;
-const float Vref = 3.3;
-const float twelfBitADC = 4096;
-const float unitValue = Vref / twelfBitADC * 1000;
-const float sensitivity = 1000.0 / 264.0;// 1000mA per 265 mV
-//I2C variables
-uint8_t i2cAddress = (0x68 << 1) | 0b0; //0xD0
-uint8_t readCH1 = 0x88; // write to acd to start reading channel 1
-uint8_t readCH2 = 0xA8; // write to acd to start reading channel 2
 
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 /* USER CODE BEGIN PFP */
-void HSB_DebugPrint(const char *x, ...);
-uint16_t HSB_ReadMCP3427(int channel);
+
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-uint8_t convCompleted = 0;
-void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef *hadc)
-{
-	convCompleted = 1;
-}
+
 /* USER CODE END 0 */
 
 /**
@@ -126,6 +105,8 @@ int main(void)
   MX_CAN1_Init();
   MX_TIM2_Init();
   /* USER CODE BEGIN 2 */
+  HSB_DebugPrint_Init(true);
+  HSB_VoltageModule_Init(0x68);
   //HAL_ADC_Start_DMA(&hadc1, (uint32_t *) rawValues, 2);
   /* USER CODE END 2 */
 
@@ -136,39 +117,7 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-	  HAL_ADC_Start_DMA(&hadc1, (uint32_t *) rawValues, 2);
-	  while(!convCompleted);
 
-	  for(uint8_t i=0; i<hadc1.Init.NbrOfConversion; i++){
-		  rawE = (uint16_t) rawValues[0];
-		  rawF = (uint16_t) rawValues[1];
-	  }
-
-	  voltageE = unitValue * rawE;
-	  voltageF = unitValue * rawF;
-
-	  currentE = (voltageE - offset) * sensitivity;
-	  currentF = (voltageF - offset) * sensitivity;
-
-	  sprintf(msg, "rawE: %hu ", rawE);
-	  HAL_UART_Transmit(&huart2, (uint8_t *) msg, strlen(msg), HAL_MAX_DELAY);
-
-	  sprintf(msg, "\trawF: %hu ", rawF);
-	  HAL_UART_Transmit(&huart2, (uint8_t *) msg, strlen(msg), HAL_MAX_DELAY);\
-
-	  sprintf(msg, "\tvoltageE: %hu ", voltageE);
-	  HAL_UART_Transmit(&huart2, (uint8_t *) msg, strlen(msg), HAL_MAX_DELAY);
-
-	  sprintf(msg, "\tvoltageF: %hu ", voltageF);
-	  HAL_UART_Transmit(&huart2, (uint8_t *) msg, strlen(msg), HAL_MAX_DELAY);
-
-	  sprintf(msg, "\tcurrentE: %hu ", currentE);
-	  HAL_UART_Transmit(&huart2, (uint8_t *) msg, strlen(msg), HAL_MAX_DELAY);
-
-	  sprintf(msg, "\tcurrentF: %hu \r\n", currentF);
-	  HAL_UART_Transmit(&huart2, (uint8_t *) msg, strlen(msg), HAL_MAX_DELAY);
-
-	  HAL_Delay(250);
   }
   /* USER CODE END 3 */
 }
@@ -234,28 +183,8 @@ void SystemClock_Config(void)
 }
 
 /* USER CODE BEGIN 4 */
-void HSB_DebugPrint(const char *x, ...){
-	if(HSB_DebugPrintOn){
-		//UART variables
-		char msg[20];
-		sprintf(msg,x);
-		HAL_UART_Transmit(&huart2, (uint8_t *) msg, strlen(msg), HAL_MAX_DELAY);
-	}
-}
 
-uint16_t HSB_ReadMCP3427(int channel){
-	uint8_t RX_Buffer [] = "A"; // Receive buffer i2c
-	HAL_I2C_Master_Transmit(&hi2c1,i2cAddress,&readCH1,1,1000); //Sending in Blocking mode
-	HAL_Delay(10);
-	HAL_I2C_Master_Receive(&hi2c1, i2cAddress, RX_Buffer, 3,1000);
-	HAL_Delay(10);
-	return RX_Buffer[1] | RX_Buffer[2];
-}
 
-void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
-{
-
-}
 /* USER CODE END 4 */
 
 /**
