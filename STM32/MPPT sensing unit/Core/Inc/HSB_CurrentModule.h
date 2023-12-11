@@ -15,8 +15,8 @@
 #include <stdbool.h>
 #include "HSB_DebugPrint.h"
 
-void HSB_CurrenModule_Init();
+uint16_t HSB_ReadCurrentModule(int channel);
 
-void HSB_CurrentModule();
+void HSB_PrintCurrentModule();
 
 #endif /* INC_HSB_CURRENTMODULE_H_ */
