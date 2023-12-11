@@ -60,6 +60,8 @@ float CurrentF;
 float VoltageE;
 float VoltageF;
 
+char msg2[20];
+
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -108,6 +110,9 @@ int main(void)
   MX_CAN1_Init();
   MX_TIM2_Init();
   /* USER CODE BEGIN 2 */
+  sprintf(msg2,"test test test");
+  HAL_UART_Transmit(&huart2, (uint8_t *) msg2, strlen(msg2), HAL_MAX_DELAY);
+  HSB_DebugPrint("init");
   HSB_DebugPrint_Init(true);
   HSB_VoltageModule_Init(0x68);
 
@@ -121,8 +126,10 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
+	  HSB_DebugPrint("while 1");
 	  HSB_CurrentModule(&CurrentE, &CurrentF);
 	  HSB_VoltageModule(&VoltageE, &VoltageF);
+	  HAL_Delay(250);
   }
   /* USER CODE END 3 */
 }
