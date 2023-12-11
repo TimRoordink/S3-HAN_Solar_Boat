@@ -36,11 +36,17 @@ extern CAN_HandleTypeDef hcan1;
 
 /* USER CODE BEGIN Private defines */
 
+//CAN_TxHeaderTypeDef   	TxHeader;
+//uint8_t               	TxData[8];
+//uint32_t              	TxMailbox;
+
 /* USER CODE END Private defines */
 
 void MX_CAN1_Init(void);
 
 /* USER CODE BEGIN Prototypes */
+
+void CAN_TX_filter_init(void);
 
 /* USER CODE END Prototypes */
 

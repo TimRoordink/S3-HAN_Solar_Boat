@@ -54,7 +54,9 @@ void MX_CAN1_Init(void)
     Error_Handler();
   }
   /* USER CODE BEGIN CAN1_Init 2 */
-
+  if (HAL_CAN_Start(&hcan1) != HAL_OK) {
+    	    Error_Handler();
+    	}
   /* USER CODE END CAN1_Init 2 */
 
 }
@@ -113,5 +115,15 @@ void HAL_CAN_MspDeInit(CAN_HandleTypeDef* canHandle)
 }
 
 /* USER CODE BEGIN 1 */
+
+void CAN_TX_filter_init(void)
+{
+	//TxHeader.StdId = 0x360;
+//	TxHeader.ExtId = 0;
+//	TxHeader.IDE = CAN_ID_STD;
+//	TxHeader.RTR = CAN_RTR_DATA;
+//	TxHeader.DLC = 8;
+//	TxHeader.TransmitGlobalTime = DISABLE;
+}
 
 /* USER CODE END 1 */

@@ -19,4 +19,8 @@ void HSB_VoltageModule_Init(uint8_t adress);
 
 uint16_t HSB_ReadMCP3427(int channel);
 
+float HSb_ConvertValue(int channel);
+
+void HSB_VoltageModule(float* E, float* F);
+
 #endif /* INC_HSB_VOLTAGEMODULE_H_ */

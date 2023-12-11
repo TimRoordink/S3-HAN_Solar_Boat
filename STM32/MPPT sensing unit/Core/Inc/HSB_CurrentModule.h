@@ -17,6 +17,6 @@
 
 uint16_t HSB_ReadCurrentModule(int channel);
 
-void HSB_PrintCurrentModule();
+void HSB_CurrentModule(float* E, float* F);
 
 #endif /* INC_HSB_CURRENTMODULE_H_ */
