@@ -1,4 +1,4 @@
-../Core/Src/HSB_CurrentModule.c:28:6:HSB_ADC_Select_ChannelE	32	static
-../Core/Src/HSB_CurrentModule.c:42:6:HSB_ADC_Select_ChannelF	32	static
-../Core/Src/HSB_CurrentModule.c:52:10:HSB_ReadCurrentModule	16	static
-../Core/Src/HSB_CurrentModule.c:72:6:HSB_CurrentModule	16	static
+../Core/Src/HSB_CurrentModule.c:20:6:HSB_ADC_Select_ChannelE	32	static
+../Core/Src/HSB_CurrentModule.c:34:6:HSB_ADC_Select_ChannelF	32	static
+../Core/Src/HSB_CurrentModule.c:44:10:HSB_ReadCurrentModule	16	static
+../Core/Src/HSB_CurrentModule.c:64:6:HSB_CurrentModule	16	static
