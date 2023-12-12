@@ -122,9 +122,9 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-//	  HSB_CurrentModule(&CurrentE, &CurrentF);
-	  HSB_VoltageModule(&VoltageE, &VoltageF);
-	  HAL_Delay(1000);
+	  HSB_CurrentModule(&CurrentE, &CurrentF);
+//	  HSB_VoltageModule(&VoltageE, &VoltageF);
+//	  HAL_Delay(1000);
   }
   /* USER CODE END 3 */
 }

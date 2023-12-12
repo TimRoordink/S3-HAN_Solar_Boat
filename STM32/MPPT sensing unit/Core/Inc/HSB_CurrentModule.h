@@ -15,6 +15,10 @@
 #include <stdbool.h>
 #include "HSB_DebugPrint.h"
 
+void HSB_ADC_Select_ChannelE (void);
+
+void HSB_ADC_Select_ChannelF (void);
+
 uint16_t HSB_ReadCurrentModule(int channel);
 
 void HSB_CurrentModule(float* E, float* F);
