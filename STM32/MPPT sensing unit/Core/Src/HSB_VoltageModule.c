@@ -37,18 +37,20 @@ uint16_t HSB_ReadMCP3427(int channel){
 	HAL_Delay(10);
 	HAL_I2C_Master_Receive(&hi2c1, i2cAddress, RX_Buffer, 3,1000);
 	HAL_Delay(10);
-	return RX_Buffer[1] | RX_Buffer[2];
+	HSB_DebugPrint("\n\r\n\rRAW ADC VALUE = %u\n\r\n\r", (RX_Buffer[0] | RX_Buffer[1]));
+	return RX_Buffer[0] | RX_Buffer[1];
 }
 
 float HSb_ConvertValue(int channel){
-	int adcRaw = HSB_ReadMCP3427(channel);
+	uint16_t adcRaw = HSB_ReadMCP3427(channel);
 	float adcVoltage = adcRaw * ADCFactor;
 	float result = adcVoltage * converionFactor;
-	HSB_DebugPrint("Voltage Module\n\rRead channel %i\n\rValue Read %%.2f", channel, result);
+	HSB_DebugPrint("Voltage Module\n\rValue %.2f\n\r", result);
 	return result;
 }
 
 void HSB_VoltageModule(float* E, float* F){
+	HSB_DebugPrint("\n\rstart voltage\n\r");
 	*E = HSb_ConvertValue(1);
 	*F = HSb_ConvertValue(2);
 }

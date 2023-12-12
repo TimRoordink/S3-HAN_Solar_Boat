@@ -26,14 +26,22 @@ void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef *hadc)
 uint16_t HSB_ReadCurrentModule(int channel){
 	HAL_ADC_Start_DMA(&hadc1, (uint32_t *) rawValues, 2);
 	while(!convCompleted);
+	for(uint8_t i=0; i<hadc1.Init.NbrOfConversion; i++){
+		  raw = (uint16_t) rawValues[channel];
+	}
+
 	raw = (uint16_t) rawValues[channel];
 	voltage = unitValue * raw;
 	current = (voltage - offset) * sensitivity;
-	HSB_DebugPrint("Current Module\n\rRead channel %i\n\rValue Read %%.2f", channel, current);
+	HSB_DebugPrint("\n\rCurrent Module\n\rValue %.2f \n\r", current);
 	return current;
+
+
+
 }
 
 void HSB_CurrentModule(float* E, float* F){
+	HSB_DebugPrint("start current");
 	*E = HSB_ReadCurrentModule(0);
 	*F = HSB_ReadCurrentModule(1);
 }

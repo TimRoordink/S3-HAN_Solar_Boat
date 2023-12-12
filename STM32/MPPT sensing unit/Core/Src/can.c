@@ -22,6 +22,10 @@
 
 /* USER CODE BEGIN 0 */
 
+CAN_TxHeaderTypeDef   	TxHeader;
+uint8_t               	TxData[8];
+uint32_t              	TxMailbox;
+
 /* USER CODE END 0 */
 
 CAN_HandleTypeDef hcan1;
@@ -118,12 +122,12 @@ void HAL_CAN_MspDeInit(CAN_HandleTypeDef* canHandle)
 
 void CAN_TX_filter_init(void)
 {
-	//TxHeader.StdId = 0x360;
-//	TxHeader.ExtId = 0;
-//	TxHeader.IDE = CAN_ID_STD;
-//	TxHeader.RTR = CAN_RTR_DATA;
-//	TxHeader.DLC = 8;
-//	TxHeader.TransmitGlobalTime = DISABLE;
+	TxHeader.StdId = 0x360;
+	TxHeader.ExtId = 0;
+	TxHeader.IDE = CAN_ID_STD;
+	TxHeader.RTR = CAN_RTR_DATA;
+	TxHeader.DLC = 8;
+	TxHeader.TransmitGlobalTime = DISABLE;
 }
 
 /* USER CODE END 1 */

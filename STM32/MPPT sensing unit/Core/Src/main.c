@@ -55,12 +55,11 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
+
 float CurrentE;
 float CurrentF;
 float VoltageE;
 float VoltageF;
-
-char msg2[20];
 
 /* USER CODE END PV */
 
@@ -110,9 +109,6 @@ int main(void)
   MX_CAN1_Init();
   MX_TIM2_Init();
   /* USER CODE BEGIN 2 */
-  sprintf(msg2,"test test test");
-  HAL_UART_Transmit(&huart2, (uint8_t *) msg2, strlen(msg2), HAL_MAX_DELAY);
-  HSB_DebugPrint("init");
   HSB_DebugPrint_Init(true);
   HSB_VoltageModule_Init(0x68);
 
@@ -126,10 +122,9 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-	  HSB_DebugPrint("while 1");
-	  HSB_CurrentModule(&CurrentE, &CurrentF);
+//	  HSB_CurrentModule(&CurrentE, &CurrentF);
 	  HSB_VoltageModule(&VoltageE, &VoltageF);
-	  HAL_Delay(250);
+	  HAL_Delay(1000);
   }
   /* USER CODE END 3 */
 }
@@ -197,22 +192,23 @@ void SystemClock_Config(void)
 /* USER CODE BEGIN 4 */
 void sendMessage(){
 
-//	TxData[0] = 0;
-//	TxData[1] = 0;
-//	TxData[2] = 0;
-//	TxData[3] = 0;
-//	TxData[4] = 0;
-//	TxData[5] = 0;
-//	TxData[6] = 0;
-//	TxData[7] = 0;
-//
-//	if (HAL_CAN_AddTxMessage(&hcan1, &TxHeader, (uint8_t*)TxData, &TxMailbox) != HAL_OK)
-//	{
-//	  uint32_t error = HAL_CAN_GetError(&hcan1);
-//	  HSB_DebugPrint("Error while sending Can Message : %un", error);
-//	  Error_Handler ();
-//	}
+	TxData[0] = 0;
+	TxData[1] = 0;
+	TxData[2] = 0;
+	TxData[3] = 0;
+	TxData[4] = 0;
+	TxData[5] = 0;
+	TxData[6] = 0;
+	TxData[7] = 0;
+
+	if (HAL_CAN_AddTxMessage(&hcan1, &TxHeader, (uint8_t*)TxData, &TxMailbox) != HAL_OK)
+	{
+	  uint32_t error = HAL_CAN_GetError(&hcan1);
+	  HSB_DebugPrint("Error while sending Can Message : %un", error);
+	  Error_Handler ();
+	}
 }
+
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
 	//function to run on interval interupt
