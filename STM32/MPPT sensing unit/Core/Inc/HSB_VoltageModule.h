@@ -8,7 +8,7 @@
 #ifndef INC_HSB_VOLTAGEMODULE_H_
 #define INC_HSB_VOLTAGEMODULE_H_
 
-#include "i2c.h"
+#include "main.h"
 
 #include <stdio.h>
 #include <string.h>

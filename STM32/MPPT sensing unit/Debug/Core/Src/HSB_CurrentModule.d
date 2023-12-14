@@ -1,5 +1,5 @@
 Core/Src/HSB_CurrentModule.o: ../Core/Src/HSB_CurrentModule.c \
- ../Core/Inc/HSB_CurrentModule.h ../Core/Inc/adc.h ../Core/Inc/main.h \
+ ../Core/Inc/HSB_CurrentModule.h ../Core/Inc/main.h \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal.h \
  ../Core/Inc/stm32l4xx_hal_conf.h \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_rcc.h \
@@ -34,9 +34,8 @@ Core/Src/HSB_CurrentModule.o: ../Core/Src/HSB_CurrentModule.c \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_tim_ex.h \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart_ex.h \
- ../Core/Inc/HSB_DebugPrint.h ../Core/Inc/usart.h
+ ../Core/Inc/HSB_DebugPrint.h
 ../Core/Inc/HSB_CurrentModule.h:
-../Core/Inc/adc.h:
 ../Core/Inc/main.h:
 ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal.h:
 ../Core/Inc/stm32l4xx_hal_conf.h:
@@ -73,4 +72,3 @@ Core/Src/HSB_CurrentModule.o: ../Core/Src/HSB_CurrentModule.c \
 ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h:
 ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart_ex.h:
 ../Core/Inc/HSB_DebugPrint.h:
-../Core/Inc/usart.h:

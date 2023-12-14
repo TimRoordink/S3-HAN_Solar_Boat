@@ -9,7 +9,7 @@
 #ifndef INC_HSB_DEBUGPRINT_H_
 #define INC_HSB_DEBUGPRINT_H_
 
-#include "usart.h"
+#include "main.h"
 
 #include <stdbool.h>
 #include <stdio.h>

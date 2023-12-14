@@ -8,7 +8,7 @@
 #ifndef INC_HSB_CURRENTMODULE_H_
 #define INC_HSB_CURRENTMODULE_H_
 
-#include "adc.h"
+#include "main.h"
 
 #include <stdio.h>
 #include <string.h>
