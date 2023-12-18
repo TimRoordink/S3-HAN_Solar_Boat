@@ -84,8 +84,8 @@ all: main-build
 main-build: MPPT\ sensing\ unit.elf secondary-outputs
 
 # Tool invocations
-MPPT\ sensing\ unit.elf MPPT\ sensing\ unit.map: $(OBJS) $(USER_OBJS) C:\Users\tim13.LAPTOP_TIM_R\Documents\GitHub\S3-HAN_Solar_Boat\STM32\MPPT\ sensing\ unit\STM32L432KCUX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-g++ -o "MPPT sensing unit.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\Users\tim13.LAPTOP_TIM_R\Documents\GitHub\S3-HAN_Solar_Boat\STM32\MPPT sensing unit\STM32L432KCUX_FLASH.ld" --specs=nosys.specs -Wl,-Map="MPPT sensing unit.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+MPPT\ sensing\ unit.elf MPPT\ sensing\ unit.map: $(OBJS) $(USER_OBJS) C:\Users\hugo\Desktop\S3-HAN_Solar_Boat\STM32\MPPT\ sensing\ unit\STM32L432KCUX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-g++ -o "MPPT sensing unit.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\Users\hugo\Desktop\S3-HAN_Solar_Boat\STM32\MPPT sensing unit\STM32L432KCUX_FLASH.ld" --specs=nosys.specs -Wl,-Map="MPPT sensing unit.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 

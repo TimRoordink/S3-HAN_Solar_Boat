@@ -1,4 +1,2 @@
-../Core/Src/HSB_CurrentModule.c:20:6:HSB_ADC_Select_ChannelE	2
-../Core/Src/HSB_CurrentModule.c:34:6:HSB_ADC_Select_ChannelF	2
-../Core/Src/HSB_CurrentModule.c:44:10:HSB_ReadCurrentModule	3
-../Core/Src/HSB_CurrentModule.c:64:6:HSB_CurrentModule	1
+../Core/Src/HSB_CurrentModule.c:28:6:HAL_ADC_ConvCpltCallback	1
+../Core/Src/HSB_CurrentModule.c:33:6:HSB_ReadCurrentModule	2
