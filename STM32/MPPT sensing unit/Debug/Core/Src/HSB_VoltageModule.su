@@ -1,4 +1,3 @@
-../Core/Src/HSB_VoltageModule.c:26:6:HSB_VoltageModule_Init	16	static
-../Core/Src/HSB_VoltageModule.c:30:10:HSB_ReadMCP3427	32	static
-../Core/Src/HSB_VoltageModule.c:46:7:HSb_ConvertValue	24	static
-../Core/Src/HSB_VoltageModule.c:54:6:HSB_VoltageModule	16	static
+../Core/Src/HSB_VoltageModule.c:31:6:HSB_VoltageModule_Init	16	static
+../Core/Src/HSB_VoltageModule.c:35:10:HSB_ReadMCP3427	32	static
+../Core/Src/HSB_VoltageModule.c:54:6:HSB_VoltageModule	32	static

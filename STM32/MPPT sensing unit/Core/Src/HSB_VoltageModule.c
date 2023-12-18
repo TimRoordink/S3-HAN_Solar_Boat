@@ -15,20 +15,25 @@ uint8_t readCH2 = 0xA8; // write to acd to start reading channel 2
 
 //adc variables
 const float ReferenceVoltage = 3.3;
-const float ADCBits = 4096;
+const float ADCBits = 65536;
 const float ADCFactor = ReferenceVoltage / ADCBits;
 //conversion factor to acount for the voltage divider on the PCB
 //58.7 is the total resistance of the devider and 2.7 the small resistor
 const float converionFactor = 1 / 2.7 * 58.7;
 
-uint16_t adcRaw;
+uint16_t adcRawE;
+uint16_t adcRawF;
+uint16_t ADCData;
+uint16_t MSB = 0;
+uint16_t LSB = 0;
+uint8_t RX_Buffer [3] = "A"; // Receive buffer i2c
 
 void HSB_VoltageModule_Init(uint8_t adress){
 	i2cAddress = (adress << 1) | 0b0;
 }
 
 uint16_t HSB_ReadMCP3427(int channel){
-	uint8_t RX_Buffer [] = "A"; // Receive buffer i2c
+
 	uint8_t read = 0;
 	if(channel == 0){
 		read = readCH1;
@@ -39,20 +44,24 @@ uint16_t HSB_ReadMCP3427(int channel){
 	HAL_Delay(10);
 	HAL_I2C_Master_Receive(&hi2c1, i2cAddress, RX_Buffer, 3,1000);
 	HAL_Delay(10);
-	HSB_DebugPrint("\n\r\n\rRAW ADC VALUE = %u\n\r\n\r", (RX_Buffer[0] | RX_Buffer[1]));
-	return RX_Buffer[0] | RX_Buffer[1];
+	MSB = (uint16_t)RX_Buffer[0] * 0x100;
+	LSB = (uint16_t)RX_Buffer[1];
+	ADCData = MSB + LSB;
+	return ADCData;
 }
 
-float HSb_ConvertValue(int channel){
-	adcRaw = HSB_ReadMCP3427(channel);
-	float adcVoltage = adcRaw * ADCFactor;
-	float result = adcVoltage * converionFactor;
-	HSB_DebugPrint("Voltage Module\n\rValue %.2f\n\r", result);
-	return result;
-}
 
 void HSB_VoltageModule(float* E, float* F){
-	HSB_DebugPrint("\n\rstart voltage\n\r");
-	*E = HSb_ConvertValue(0);
-	*F = HSb_ConvertValue(1);
+	adcRawE = HSB_ReadMCP3427(0);
+	float adcVoltageE = adcRawE * ADCFactor;
+	float resultE = adcVoltageE * converionFactor;
+	HSB_DebugPrint("Voltage Module\n\rValue E %.2f\n\r", resultE);
+
+	adcRawF = HSB_ReadMCP3427(1);
+	float adcVoltageF = adcRawF * ADCFactor;
+	float resultF = adcVoltageF * converionFactor;
+	HSB_DebugPrint("Voltage Module\n\rValue E %.2f\n\r", resultF);
+
+	*E = resultE;
+	*F = resultF;
 }
