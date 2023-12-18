@@ -31,7 +31,7 @@ void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef *hadc)
 }
 
 void HSB_ReadCurrentModule(float* E, float* F){
-	HAL_ADC_Start_DMA(&hadc1, (uint32_t*)adcResults, 1);
+	HAL_ADC_Start_DMA(&hadc1, (uint32_t*)adcResults, adcChannelCount);
 	while (adcConversionComplete == 0) {
 		  //wait
 	}
@@ -46,7 +46,7 @@ void HSB_ReadCurrentModule(float* E, float* F){
 	rawF = adcResults[1];
 	voltageF = unitValue * rawF;
 	currentF = (voltageF - offset) * sensitivity;
-	HSB_DebugPrint("Current Module\n\rChannelF:\tValue %.2f \n\r", currentE);
+	HSB_DebugPrint("Current Module\n\rChannelF:\tValue %.2f \n\r", currentF);
 
 	*E = currentE;
 	*F = currentF;

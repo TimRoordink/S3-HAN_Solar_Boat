@@ -21,6 +21,8 @@ const float ADCFactor = ReferenceVoltage / ADCBits;
 //58.7 is the total resistance of the devider and 2.7 the small resistor
 const float converionFactor = 1 / 2.7 * 58.7;
 
+uint16_t adcRaw;
+
 void HSB_VoltageModule_Init(uint8_t adress){
 	i2cAddress = (adress << 1) | 0b0;
 }
@@ -42,7 +44,7 @@ uint16_t HSB_ReadMCP3427(int channel){
 }
 
 float HSb_ConvertValue(int channel){
-	uint16_t adcRaw = HSB_ReadMCP3427(channel);
+	adcRaw = HSB_ReadMCP3427(channel);
 	float adcVoltage = adcRaw * ADCFactor;
 	float result = adcVoltage * converionFactor;
 	HSB_DebugPrint("Voltage Module\n\rValue %.2f\n\r", result);
@@ -51,6 +53,6 @@ float HSb_ConvertValue(int channel){
 
 void HSB_VoltageModule(float* E, float* F){
 	HSB_DebugPrint("\n\rstart voltage\n\r");
-	*E = HSb_ConvertValue(1);
-	*F = HSb_ConvertValue(2);
+	*E = HSb_ConvertValue(0);
+	*F = HSb_ConvertValue(1);
 }

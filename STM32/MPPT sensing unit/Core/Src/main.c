@@ -143,6 +143,7 @@ int main(void)
 	  MX_ADC1_Init();
 	  HSB_ReadCurrentModule(&CurrentE, &CurrentF);
 	  HSB_VoltageModule(&VoltageE, &VoltageF);
+	  HAL_Delay(1000);
   }
   /* USER CODE END 3 */
 }
