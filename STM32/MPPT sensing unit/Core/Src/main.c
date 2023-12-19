@@ -61,6 +61,8 @@ UART_HandleTypeDef huart2;
 
 /* USER CODE BEGIN PV */
 
+float MiliCurrentE;
+float MiliCurrentF;
 float CurrentE;
 float CurrentF;
 float VoltageE;
@@ -130,7 +132,7 @@ int main(void)
   MX_TIM2_Init();
   /* USER CODE BEGIN 2 */
   CAN_TX_filter_init();
-  HSB_DebugPrint_Init(true);
+  HSB_DebugPrint_Init(false);
   HSB_VoltageModule_Init(0x68);
 
   //HAL_ADC_Start_DMA(&hadc1, (uint32_t *) rawValues, 2);
@@ -144,8 +146,11 @@ int main(void)
 
     /* USER CODE BEGIN 3 */
 	  MX_ADC1_Init();
-	  HSB_ReadCurrentModule(&CurrentE, &CurrentF);
+	  HSB_ReadCurrentModule(&MiliCurrentE, &MiliCurrentF);
 	  HSB_VoltageModule(&VoltageE, &VoltageF);
+
+	  CurrentE = MiliCurrentE / 1000;
+	  CurrentF = MiliCurrentF / 1000;
 
 	  PowerE = VoltageE * CurrentE;
 	  PowerF = VoltageF * CurrentF;

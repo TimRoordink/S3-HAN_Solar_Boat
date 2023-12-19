@@ -15,10 +15,10 @@ float currentF;
 uint16_t rawF;
 float voltageF;
 
-const float Vref = 322;
+const float Vref = 300;
 const float RefVal = 3.3;
 const float unitValue = RefVal / 4096 * 1000;
-const float sensitivity = 1000.0 / 264.0;// 1000mA per 264 mV
+const float sensitivity = 1000.0 / 264.0;// 1A per 264 mV
 
 uint16_t adcResults[2];
 int adcChannelCount = 2;
