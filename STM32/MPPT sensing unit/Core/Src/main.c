@@ -129,6 +129,7 @@ int main(void)
   MX_CAN1_Init();
   MX_TIM2_Init();
   /* USER CODE BEGIN 2 */
+  CAN_TX_filter_init();
   HSB_DebugPrint_Init(true);
   HSB_VoltageModule_Init(0x68);
 
@@ -313,6 +314,10 @@ static void MX_CAN1_Init(void)
     Error_Handler();
   }
   /* USER CODE BEGIN CAN1_Init 2 */
+
+  if (HAL_CAN_Start(&hcan1) != HAL_OK) {
+	  Error_Handler();
+  }
 
   /* USER CODE END CAN1_Init 2 */
 
@@ -536,11 +541,6 @@ void sendMessage(){
 	  HSB_DebugPrint("Error while sending Can Message : %un", error);
 	  Error_Handler ();
 	}
-}
-
-void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
-{
-	//function to run on interval interupt
 }
 
 void CAN_TX_filter_init(void)
