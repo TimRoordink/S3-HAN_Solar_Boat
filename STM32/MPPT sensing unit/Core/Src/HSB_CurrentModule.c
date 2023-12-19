@@ -15,11 +15,10 @@ float currentF;
 uint16_t rawF;
 float voltageF;
 
-const float offset = 322;
-const float Vref = 3.3;
-const float twelfBitADC = 4096;
-const float unitValue = Vref / twelfBitADC * 1000;
-const float sensitivity = 1000.0 / 264.0;// 1000mA per 265 mV
+const float Vref = 322;
+const float RefVal = 3.3;
+const float unitValue = RefVal / 4096 * 1000;
+const float sensitivity = 1000.0 / 264.0;// 1000mA per 264 mV
 
 uint16_t adcResults[2];
 int adcChannelCount = 2;
@@ -36,16 +35,18 @@ void HSB_ReadCurrentModule(float* E, float* F){
 		  //wait
 	}
 	adcConversionComplete = 0;
-
+	HAL_ADC_Stop_DMA(&hadc1);
 
 	rawE = adcResults[0];
-	voltageE = unitValue * rawE;
-	currentE = (voltageE - offset) * sensitivity;
-	HSB_DebugPrint("Current Module\n\rChannelE:\tValue %.2f \n\r", currentE);
-
 	rawF = adcResults[1];
+
+	voltageE = unitValue * rawE;
+	currentE = (voltageE - Vref) * sensitivity;
+
 	voltageF = unitValue * rawF;
-	currentF = (voltageF - offset) * sensitivity;
+	currentF = (voltageF - Vref) * sensitivity;
+
+	HSB_DebugPrint("Current Module\n\rChannelE:\tValue %.2f \n\r", currentE);
 	HSB_DebugPrint("Current Module\n\rChannelF:\tValue %.2f \n\r", currentF);
 
 	*E = currentE;

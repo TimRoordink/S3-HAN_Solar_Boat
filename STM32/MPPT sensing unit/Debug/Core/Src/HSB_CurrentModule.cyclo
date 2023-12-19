@@ -1,2 +1,2 @@
-../Core/Src/HSB_CurrentModule.c:28:6:HAL_ADC_ConvCpltCallback	1
-../Core/Src/HSB_CurrentModule.c:33:6:HSB_ReadCurrentModule	2
+../Core/Src/HSB_CurrentModule.c:27:6:HAL_ADC_ConvCpltCallback	1
+../Core/Src/HSB_CurrentModule.c:32:6:HSB_ReadCurrentModule	2

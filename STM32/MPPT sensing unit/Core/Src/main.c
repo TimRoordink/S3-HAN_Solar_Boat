@@ -65,6 +65,8 @@ float CurrentE;
 float CurrentF;
 float VoltageE;
 float VoltageF;
+float PowerE;
+float PowerF;
 
 CAN_TxHeaderTypeDef   	TxHeader;
 uint8_t               	TxData[8];
@@ -143,6 +145,9 @@ int main(void)
 	  MX_ADC1_Init();
 	  HSB_ReadCurrentModule(&CurrentE, &CurrentF);
 	  HSB_VoltageModule(&VoltageE, &VoltageF);
+
+	  PowerE = VoltageE * CurrentE;
+	  PowerF = VoltageF * CurrentF;
 
 	  HAL_Delay(1000);
   }
@@ -264,12 +269,12 @@ static void MX_ADC1_Init(void)
 
   /** Configure Regular Channel
   */
-//  sConfig.Channel = ADC_CHANNEL_6;
-//  sConfig.Rank = ADC_REGULAR_RANK_2;
-//  if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK)
-//  {
-//    Error_Handler();
-//  }
+  sConfig.Channel = ADC_CHANNEL_6;
+  sConfig.Rank = ADC_REGULAR_RANK_2;
+  if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
   /* USER CODE BEGIN ADC1_Init 2 */
 
   /* USER CODE END ADC1_Init 2 */
