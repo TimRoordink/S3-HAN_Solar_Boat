@@ -1678,8 +1678,8 @@ int main(void)
   /* USER CODE BEGIN 2 */
   CAN_TX_filter_init();
  8001214:	f000 fad2 	bl	80017bc <CAN_TX_filter_init>
-  HSB_DebugPrint_Init(true);
- 8001218:	2001      	movs	r0, #1
+  HSB_DebugPrint_Init(false);
+ 8001218:	2000      	movs	r0, #0
  800121a:	f7ff fee7 	bl	8000fec <HSB_DebugPrint_Init>
   HSB_VoltageModule_Init(0x68);
  800121e:	2068      	movs	r0, #104	; 0x68
