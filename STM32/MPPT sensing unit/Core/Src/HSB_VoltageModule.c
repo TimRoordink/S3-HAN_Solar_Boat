@@ -14,7 +14,7 @@ uint8_t readCH1 = 0x88; // write to acd to start reading channel 1
 uint8_t readCH2 = 0xA8; // write to acd to start reading channel 2
 
 //adc variables
-const float ReferenceVoltage = 3.3;
+const float ReferenceVoltage = 4.096;
 const float ADCBits = 65536;
 const float ADCFactor = ReferenceVoltage / ADCBits;
 //conversion factor to acount for the voltage divider on the PCB
@@ -42,8 +42,10 @@ uint16_t HSB_ReadMCP3427(int channel){
 	}
 	HAL_I2C_Master_Transmit(&hi2c1,i2cAddress,&read,1,1000); //Sending in Blocking mode
 	HAL_Delay(10);
-	HAL_I2C_Master_Receive(&hi2c1, i2cAddress, RX_Buffer, 3,1000);
-	HAL_Delay(10);
+	do{
+		HAL_I2C_Master_Receive(&hi2c1, i2cAddress, RX_Buffer, 3, 1000);
+		HAL_Delay(10);
+	}while(RX_Buffer[2] & 1<<(7) );
 	MSB = (uint16_t)RX_Buffer[0] * 0x100;
 	LSB = (uint16_t)RX_Buffer[1];
 	ADCData = MSB + LSB;
