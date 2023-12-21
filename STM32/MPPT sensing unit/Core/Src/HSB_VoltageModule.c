@@ -53,7 +53,6 @@ uint16_t HSB_ReadMCP3427(int channel){
 	return ADCData;
 }
 
-
 void HSB_VoltageModule(float* E, float* F){
 	adcRawE = HSB_ReadMCP3427(0);
 	float adcVoltageE = adcRawE * ADCFactor;

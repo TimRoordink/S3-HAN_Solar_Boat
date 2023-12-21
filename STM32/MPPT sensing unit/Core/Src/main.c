@@ -86,7 +86,7 @@ static void MX_I2C1_Init(void);
 static void MX_CAN1_Init(void);
 static void MX_TIM2_Init(void);
 /* USER CODE BEGIN PFP */
-void sendMessage();
+void sendMessage(uint8_t group);
 void CAN_TX_filter_init(void);
 /* USER CODE END PFP */
 
@@ -154,6 +154,8 @@ int main(void)
 
 	  PowerE = VoltageE * CurrentE;
 	  PowerF = VoltageF * CurrentF;
+
+
 
 	  HAL_Delay(1000);
   }
@@ -529,15 +531,35 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
-void sendMessage(){
+void sendMessage(uint8_t group){
+	uint16_t current;
+	uint16_t voltage;
+	uint16_t power;
 
-	TxData[0] = 0;
-	TxData[1] = 0;
-	TxData[2] = 0;
-	TxData[3] = 0;
-	TxData[4] = 0;
-	TxData[5] = 0;
-	TxData[6] = 0;
+	switch(group){
+		case 'E':
+			current = (uint16_t)(CurrentE * 100);
+			voltage = (uint16_t)(VoltageE * 100);
+			power = (uint16_t)(PowerE * 100);
+			break;
+		case 'F':
+			current = (uint16_t)(CurrentF * 100);
+			voltage = (uint16_t)(VoltageF * 100);
+			power = (uint16_t)(PowerF * 100);
+			break;
+		default:
+			current = 0;
+			voltage = 0;
+			power = 0;
+	}
+
+	TxData[0] = group;
+	TxData[1] = (voltage & 0xFF00) >> 8;
+	TxData[2] = voltage & 0x00FF;
+	TxData[3] = (current & 0xFF00) >> 8;
+	TxData[4] = current & 0x00FF;
+	TxData[5] = (power & 0xFF00) >> 8;
+	TxData[6] = power & 0x00FF;
 	TxData[7] = 0;
 
 	if (HAL_CAN_AddTxMessage(&hcan1, &TxHeader, (uint8_t*)TxData, &TxMailbox) != HAL_OK)
@@ -550,7 +572,7 @@ void sendMessage(){
 
 void CAN_TX_filter_init(void)
 {
-	TxHeader.StdId = 0x360;
+	TxHeader.StdId = 0x200;
 	TxHeader.ExtId = 0;
 	TxHeader.IDE = CAN_ID_STD;
 	TxHeader.RTR = CAN_RTR_DATA;

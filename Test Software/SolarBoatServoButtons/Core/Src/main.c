@@ -185,8 +185,7 @@ void SystemClock_Config(void)
 /* USER CODE BEGIN 4 */
 void SendState(void)
 {
-	TxData[0] = (state & 0xFF00) >> 8;
-	TxData[1] = state & 0x00FF;
+
 	TxData[2] = 0;
 	TxData[3] = 0;
 	TxData[4] = 0;
