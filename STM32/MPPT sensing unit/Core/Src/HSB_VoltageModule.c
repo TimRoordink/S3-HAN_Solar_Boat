@@ -33,19 +33,20 @@ void HSB_VoltageModule_Init(uint8_t adress){
 }
 
 uint16_t HSB_ReadMCP3427(int channel){
-
 	uint8_t read = 0;
 	if(channel == 0){
 		read = readCH1;
 	}else{
 		read = readCH2;
 	}
+
 	HAL_I2C_Master_Transmit(&hi2c1,i2cAddress,&read,1,1000); //Sending in Blocking mode
 	HAL_Delay(10);
 	do{
 		HAL_I2C_Master_Receive(&hi2c1, i2cAddress, RX_Buffer, 3, 1000);
 		HAL_Delay(10);
-	}while(RX_Buffer[2] & 1<<(7) );
+	}while(RX_Buffer[2] & 1<<(7));
+
 	MSB = (uint16_t)RX_Buffer[0] * 0x100;
 	LSB = (uint16_t)RX_Buffer[1];
 	ADCData = MSB + LSB;
